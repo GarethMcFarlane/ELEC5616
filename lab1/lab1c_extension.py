@@ -28,9 +28,8 @@ for shortened_to in range(3,10):
   dict = {}
   m_attempt = "Your friend Mallory changed her phone number to 02"
   for phonenumber in range(1000,10000):
-    m_attempt = m_attempt + str(phonenumber)
-    h_attempt = SHA256.new(m_attempt.encode("ascii")).hexdigest()[:shortened_to]
-    dict[h_attempt] = m_attempt
+    h_attempt = SHA256.new((m_attempt + str(phonenumber)).encode("ascii")).hexdigest()[:shortened_to]
+    dict[h_attempt] = m_attempt + str(phonenumber)
     #Store key pair in dictionary
 
 
@@ -51,12 +50,15 @@ for shortened_to in range(3,10):
     impersonator_hash = h.hexdigest()[:shortened_to]
     # If the 'impersonator hash' collides with the original hash, we found our collision
     if impersonator_hash in dict:
+      print("Found hash collision:")
+      print("%s" % dict[impersonator_hash])
+      print("collision with:")
+      print("%s" % m_dash % nonce)
       break
     # Else, loop around and try another variation
     total_hashes += 1
 
   end_time = time()
-  print('End message: "%s"' % (m_dash % nonce))
   print("%d different message / hash combinations were tested in total over %0.2f seconds" % (total_hashes, end_time - start_time))
   print("%d attempts to find a collision were expected (2**(n-1)) [assuming no hash duplicates]" % 2**((shortened_to*4)-1))
   print()
