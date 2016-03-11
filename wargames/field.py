@@ -1,0 +1,6 @@
+crypt = "WOYFNZCMSHVUVTGBFUTWABTZPFHIMFTFOSUUXFQCHKVKGMPUUQMHRXIOVBRZEPJYFKKVJWGEIOVHUKEBJUNSMTHIMFTFKUBULMMQX"
+
+keylength = 9
+
+for index in range(0,keylength):
+	print(crypt[index::keylength])
