@@ -11,7 +11,6 @@ while True:
   # Generate random string and hash it.
   randomStr = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(20))
   h_attempt = MD5.new(randomStr.encode("ascii")).hexdigest()
-  print(h_attempt)
   if (h_attempt == hash):
     print(randomStr)
     break
